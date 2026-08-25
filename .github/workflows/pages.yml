@@ -1,0 +1,41 @@
+name: pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore stills and faces
+        run: |
+          set -euo pipefail
+          mkdir -p images fonts
+          curl -fsSL -o images/logistics-usa.jpg https://davidtphung.github.io/shipfront-the-crate/images/logistics-usa.jpg
+          curl -fsSL -o images/procurement.jpg https://davidtphung.github.io/shipfront-the-crate/images/procurement.jpg
+          curl -fsSL -o images/fulfillment.jpg https://davidtphung.github.io/shipfront-the-crate/images/fulfillment.jpg
+          curl -fsSL -o images/integration.jpg https://davidtphung.github.io/shipfront-the-crate/images/integration.jpg
+          echo "01268520751d59bf9762d2d7d7c3e1555ba60c8d  images/logistics-usa.jpg" | sha1sum -c
+          curl -fsSL -o fonts/space-grotesk-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-400-normal.woff2
+          curl -fsSL -o fonts/space-grotesk-700.woff2 https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-700-normal.woff2
+          curl -fsSL -o fonts/geist-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-400-normal.woff2
+          curl -fsSL -o fonts/geist-500.woff2 https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-500-normal.woff2
+          curl -fsSL -o fonts/jetbrains-mono-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.woff2
+          curl -fsSL -o fonts/jetbrains-mono-700.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-700-normal.woff2
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
