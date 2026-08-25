@@ -33,7 +33,6 @@ jobs:
           curl -fsSL -o fonts/geist-500.woff2 https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-500-normal.woff2
           curl -fsSL -o fonts/jetbrains-mono-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.woff2
           curl -fsSL -o fonts/jetbrains-mono-700.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-700-normal.woff2
-      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
