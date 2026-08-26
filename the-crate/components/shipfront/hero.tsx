@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CardSurface } from "@/components/shipfront/dynamic-card";
 import { heroShipment, shipmentEvents } from "@/data/shipments";
 import { easeOutExpo, usePrefersReducedMotion } from "@/lib/motion";
 
@@ -68,32 +69,32 @@ export function Hero() {
           <span className="pointer-events-none absolute -right-4 -top-16 font-mono text-[120px] font-bold leading-none text-sf-ink/5 md:text-[180px]">
             01
           </span>
-          <div className="relative overflow-hidden rounded-[12px] border border-sf-line bg-sf-paper p-4 shadow-[0_20px_60px_rgba(16,17,17,0.06)] md:p-5">
+          <CardSurface padded={false} className="relative overflow-hidden rounded-[16px] p-4 shadow-[0_20px_60px_rgba(16,17,17,0.06)] md:p-5">
             <div className="mb-4 flex items-center justify-between gap-3">
               <p className="mono text-[11px] tracking-[0.14em] text-sf-muted">SF-2408-1187 / INTERMODAL</p>
               <span className="bg-sf-lime px-2 py-1 font-mono text-[11px] font-semibold text-sf-ink">ON TRACK</span>
             </div>
             <ShipmentMap />
             <div className="mt-4 grid gap-3 md:grid-cols-2">
-              <div className="border border-sf-line p-3">
+              <CardSurface padded={false} className="rounded-[12px] p-3">
                 <p className="label">Shipment health</p>
                 <p className="mt-2 text-2xl font-semibold tracking-tight">72%</p>
                 <p className="mono mt-1 text-[12px] text-sf-muted">ETA AUG 28 / 09:40</p>
                 <div className="mt-3 h-1 bg-sf-soft">
                   <div className="h-full w-[72%] bg-sf-blue" />
                 </div>
-              </div>
-              <div className="border border-sf-line p-3">
+              </CardSurface>
+              <CardSurface padded={false} className="rounded-[12px] p-3">
                 <p className="label">Assigned owner</p>
                 <p className="mt-2 font-semibold">Maya Chen</p>
                 <p className="mt-1 text-sm text-sf-muted">Pacific + Rail</p>
                 <p className="mono mt-3 text-[12px] text-sf-muted">RISK 18 / LOW</p>
-              </div>
-              <div className="border border-sf-line p-3 md:col-span-2">
+              </CardSurface>
+              <CardSurface padded={false} className="rounded-[12px] p-3 md:col-span-2">
                 <p className="label">Recent activity</p>
                 <ol className="mt-3 space-y-2">
                   {events.map((event) => (
-                    <li key={event.title} className="flex items-start justify-between gap-3 text-sm">
+                    <li key={event.title} className="row-live flex items-start justify-between gap-3 rounded-[8px] px-1 py-1 text-sm">
                       <span>
                         <span className="font-medium">{event.title}</span>
                         <span className="block text-sf-muted">{event.location}</span>
@@ -102,9 +103,9 @@ export function Hero() {
                     </li>
                   ))}
                 </ol>
-              </div>
+              </CardSurface>
             </div>
-          </div>
+          </CardSurface>
         </motion.div>
       </div>
     </section>

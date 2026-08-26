@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CardSurface } from "@/components/shipfront/dynamic-card";
 import { integrationNodes } from "@/data/industries";
 
 export function Integrations() {
@@ -18,17 +19,19 @@ export function Integrations() {
         </p>
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {integrationNodes.map((node) => (
-            <button
+            <CardSurface
               key={node.id}
+              as="button"
               type="button"
+              padded={false}
               onClick={() => setActive(node.id)}
-              className={`border px-4 py-4 text-left ${active === node.id ? "border-sf-ink bg-sf-paper" : "border-sf-line"}`}
+              className={`w-full rounded-[14px] px-4 py-4 text-left ${active === node.id ? "border-sf-ink" : ""}`}
             >
               <span className="block font-semibold">{node.label}</span>
-            </button>
+            </CardSurface>
           ))}
         </div>
-        <div className="mt-6 border border-sf-line bg-sf-paper p-6">
+        <CardSurface className="mt-6 rounded-[16px]">
           <p className="label">Selected category</p>
           <p className="mt-3 text-2xl font-semibold">{selected.label}</p>
           <p className="mt-2 max-w-2xl text-sf-muted">{selected.copy}</p>
@@ -38,7 +41,7 @@ export function Integrations() {
           <p className="mt-2 max-w-xl text-sm text-sf-muted">
             Use APIs, webhooks, and structured shipment events to bring operational context into the tools your team already uses.
           </p>
-        </div>
+        </CardSurface>
       </div>
     </section>
   );

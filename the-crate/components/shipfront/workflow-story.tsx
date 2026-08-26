@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CardSurface } from "@/components/shipfront/dynamic-card";
 import { workflowSteps } from "@/data/workflows";
 import { cx } from "@/lib/utils";
 
@@ -19,25 +20,24 @@ export function WorkflowStory() {
           <ol className="space-y-3">
             {workflowSteps.map((item, index) => (
               <li key={item.index}>
-                <button
+                <CardSurface
+                  as="button"
                   type="button"
+                  padded={false}
                   onClick={() => setActive(index)}
                   onFocus={() => setActive(index)}
-                  className={cx(
-                    "w-full border px-4 py-4 text-left transition-colors",
-                    active === index ? "border-sf-ink bg-sf-paper" : "border-sf-line bg-transparent",
-                  )}
+                  className={cx("w-full rounded-[14px] px-4 py-4 text-left", active === index && "border-sf-ink")}
                 >
                   <span className="mono text-[11px] text-sf-blue">
                     {item.index} - {item.title}
                   </span>
                   <span className="mt-2 block text-xl font-semibold tracking-tight">{item.headline}</span>
                   <span className="mt-2 block text-sf-muted">{item.copy}</span>
-                </button>
+                </CardSurface>
               </li>
             ))}
           </ol>
-          <div className="sticky top-28 h-fit border border-sf-line bg-sf-paper p-6">
+          <CardSurface className="sticky top-28 h-fit rounded-[16px]">
             <p className="label">Operational thread</p>
             <p className="mt-4 text-3xl font-semibold tracking-tight">{step.title}</p>
             <svg viewBox="0 0 480 220" className="mt-8 w-full" role="img" aria-label="Abstract route from warehouse to destination">
@@ -56,7 +56,7 @@ export function WorkflowStory() {
               })}
             </svg>
             <p className="mono mt-4 text-[12px] text-sf-muted">SF-01 / {step.index} / {step.title.toUpperCase()}</p>
-          </div>
+          </CardSurface>
         </div>
       </div>
     </section>

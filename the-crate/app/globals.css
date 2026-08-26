@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --sf-canvas: #f7f7f2;
+  --sf-canvas: #ffffff;
   --sf-paper: #ffffff;
   --sf-ink: #101111;
   --sf-muted: #656b70;
@@ -170,5 +170,59 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .route-dash {
     animation: none;
+  }
+
+  .dynamic-card,
+  .dynamic-card * {
+    transition: none !important;
+  }
+}
+
+.dynamic-card {
+  box-shadow: 0 0 0 rgba(16, 17, 17, 0);
+  transition:
+    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dynamic-card:hover,
+.dynamic-card:focus-within {
+  border-color: rgba(30, 99, 255, 0.45);
+  box-shadow: 0 18px 40px rgba(16, 17, 17, 0.08);
+}
+
+.dynamic-card.night-card:hover,
+.dynamic-card.night-card:focus-within {
+  border-color: rgba(30, 99, 255, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.card-spot {
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.row-live {
+  transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.row-live:hover,
+.row-live:focus-visible {
+  background: var(--sf-blue-pale);
+}
+
+.live-dot {
+  animation: live-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
   }
 }

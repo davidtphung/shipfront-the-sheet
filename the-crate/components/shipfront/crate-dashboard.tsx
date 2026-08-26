@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { CardSurface } from "@/components/shipfront/dynamic-card";
 import { shipmentEvents, shipments } from "@/data/shipments";
 import type { Shipment } from "@/types/shipfront";
 import { cx, statusTone } from "@/lib/utils";
@@ -30,7 +31,7 @@ export function CrateDashboard() {
           The Crate brings every system signal into a shared workspace: carrier events, ETAs, documents, cost, risk, owners, communications, and next actions.
         </p>
 
-        <div className="mt-12 overflow-hidden rounded-[12px] border border-sf-line bg-sf-paper">
+        <CardSurface padded={false} className="mt-12 overflow-hidden rounded-[16px]">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-sf-line px-4 py-3">
             <div className="flex items-center gap-3">
               <span className="text-[12px] font-bold tracking-[0.16em]">SHIPFRONT</span>
@@ -84,7 +85,7 @@ export function CrateDashboard() {
               </ol>
             </aside>
           </div>
-        </div>
+        </CardSurface>
       </div>
     </section>
   );
@@ -99,6 +100,8 @@ function ShipmentTable({
   selectedId: string;
   onSelect: (id: string) => void;
 }) {
+  const [tip, setTip] = useState<string | null>(null);
+
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full text-left text-sm">
@@ -113,11 +116,24 @@ function ShipmentTable({
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={row.id} className={cx("border-b border-sf-line", selectedId === row.id && "bg-sf-blue-pale")}>
-              <td className="px-3 py-3">
+            <tr
+              key={row.id}
+              className={cx("row-live border-b border-sf-line", selectedId === row.id && "bg-sf-blue-pale")}
+              onMouseEnter={() => setTip(row.id)}
+              onMouseLeave={() => setTip((current) => (current === row.id ? null : current))}
+            >
+              <td className="relative px-3 py-3">
                 <button type="button" className="text-left font-medium underline-offset-2 hover:underline" onClick={() => onSelect(row.id)}>
                   {row.reference}
                 </button>
+                {tip === row.id ? (
+                  <div className="absolute left-3 top-full z-20 mt-1 w-64 rounded-[12px] border border-sf-line bg-white p-3 text-xs shadow-[0_12px_30px_rgba(16,17,17,0.1)]">
+                    <p className="font-semibold">{row.reference}</p>
+                    <p className="mt-1 text-sf-muted">
+                      {row.origin} to {row.destination}. {row.status}. Owner {row.owner}.
+                    </p>
+                  </div>
+                ) : null}
               </td>
               <td className="px-3 py-3 text-sf-muted">
                 {row.origin} → {row.destination}

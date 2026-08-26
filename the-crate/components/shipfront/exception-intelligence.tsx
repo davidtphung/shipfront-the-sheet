@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { DynamicCard } from "@/components/shipfront/dynamic-card";
 import { exceptions } from "@/data/exceptions";
 import { cx } from "@/lib/utils";
 
@@ -21,8 +22,8 @@ export function ExceptionIntelligence() {
         </p>
 
         <div className="mt-12 grid gap-4 lg:grid-cols-[1fr_1fr_0.9fr]">
-          <div className="border border-sf-night-line bg-sf-night-surface">
-            <p className="border-b border-sf-night-line px-4 py-3 text-[12px] uppercase tracking-[0.14em] text-sf-night-muted">
+          <DynamicCard tone="night" as="div">
+            <p className="-mx-6 -mt-6 border-b border-sf-night-line px-4 py-3 text-[12px] uppercase tracking-[0.14em] text-sf-night-muted">
               Exception queue
             </p>
             <ul>
@@ -52,9 +53,9 @@ export function ExceptionIntelligence() {
                 </li>
               ))}
             </ul>
-          </div>
+          </DynamicCard>
 
-          <div className="border border-sf-night-line bg-sf-night-surface p-5">
+          <DynamicCard tone="night" as="div">
             <p className="label text-sf-night-muted">Route</p>
             <svg viewBox="0 0 360 220" className="mt-4 w-full" role="img" aria-label="Original and contingency path for the selected exception">
               <path d="M30 160 C 90 40, 180 40, 220 110 S 300 190, 340 70" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
@@ -64,9 +65,9 @@ export function ExceptionIntelligence() {
               <circle cx="340" cy="70" r="5" fill="#F4F7F3" />
             </svg>
             <p className="mt-4 text-sm text-sf-night-muted">Blue path is the contingency. Red mark is the congestion zone.</p>
-          </div>
+          </DynamicCard>
 
-          <div className="border border-sf-night-line bg-sf-night-surface p-5">
+          <DynamicCard tone="night" as="div">
             <p className="label text-sf-night-muted">Recommendation</p>
             <h3 className="mt-4 text-2xl font-semibold tracking-tight">{selected.recommendedAction}</h3>
             <p className="mt-3 text-sf-night-muted">{selected.impact}</p>
@@ -84,7 +85,7 @@ export function ExceptionIntelligence() {
                 Create contingency
               </button>
             </div>
-          </div>
+          </DynamicCard>
         </div>
       </div>
     </section>

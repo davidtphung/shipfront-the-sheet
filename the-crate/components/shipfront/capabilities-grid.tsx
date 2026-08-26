@@ -1,22 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { capabilities } from "@/data/industries";
+import { DynamicCard } from "@/components/shipfront/dynamic-card";
 import { cx } from "@/lib/utils";
 
 export function CapabilitiesGrid() {
   return (
-    <section id="operations" className="scroll-mt-24 px-5 py-24 md:px-8 md:py-36" aria-labelledby="cap-heading">
-      <div className="mx-auto max-w-[1520px]">
+    <section id="operations" className="scroll-mt-24 bg-white px-5 py-24 md:px-8 md:py-36" aria-labelledby="cap-heading">
+      <div className="mx-auto max-w-[1440px]">
         <p className="label">04 - Operate with context</p>
         <h2 id="cap-heading" className="display mt-5 max-w-[14ch] text-[clamp(3rem,5vw,5.6rem)]">
           The details that keep goods moving.
         </h2>
         <div className="mt-12 grid gap-4 md:grid-cols-6">
           {capabilities.map((item, index) => (
-            <article
+            <DynamicCard
               key={item.id}
+              delay={index * 0.06}
               className={cx(
-                "group border border-sf-line bg-sf-paper p-6 transition-colors hover:bg-sf-soft/70",
                 item.span === "wide" && "md:col-span-4",
                 item.span === "tall" && "md:col-span-2 md:row-span-2",
                 item.span === "base" && "md:col-span-2",
@@ -26,7 +28,7 @@ export function CapabilitiesGrid() {
               <h3 className="mt-4 text-2xl font-semibold tracking-tight">{item.title}</h3>
               <p className="mt-3 text-sf-muted">{item.description}</p>
               <CapabilityVisual id={item.id} />
-            </article>
+            </DynamicCard>
           ))}
         </div>
       </div>
@@ -35,12 +37,17 @@ export function CapabilitiesGrid() {
 }
 
 function CapabilityVisual({ id }: { id: string }) {
+  const [hot, setHot] = useState(0);
+
   if (id === "live") {
     return (
-      <div className="mt-6 space-y-2">
+      <div className="mt-6 space-y-2" onMouseMove={(event) => setHot(Math.min(2, Math.floor((event.nativeEvent.offsetY || 0) / 28)))}>
         {["Long Beach", "Colton", "Chicago"].map((stop, index) => (
-          <div key={stop} className="flex items-center gap-3 text-sm">
-            <span className={cx("h-2 w-2 rounded-full", index < 2 ? "bg-sf-blue" : "bg-sf-lime")} />
+          <div
+            key={stop}
+            className={cx("row-live flex items-center gap-3 rounded-[10px] px-3 py-2 text-sm", hot === index && "bg-sf-blue-pale")}
+          >
+            <span className={cx("live-dot h-2 w-2 rounded-full", index < 2 ? "bg-sf-blue" : "bg-sf-green")} />
             {stop}
             <span className="ml-auto mono text-[11px] text-sf-muted">{index < 2 ? "CLEAR" : "NEXT"}</span>
           </div>
@@ -51,27 +58,29 @@ function CapabilityVisual({ id }: { id: string }) {
   if (id === "exceptions") {
     return (
       <div className="mt-6 space-y-2 text-sm">
-        <p className="bg-sf-red/10 px-3 py-2">Critical · SF-2408-1223 · +18h</p>
-        <p className="bg-sf-orange/15 px-3 py-2">Watch · SF-2408-1187 · +4h</p>
+        <p className="row-live rounded-[10px] bg-sf-red/10 px-3 py-2">Critical · SF-2408-1223 · +18h</p>
+        <p className="row-live rounded-[10px] bg-sf-orange/15 px-3 py-2">Watch · SF-2408-1187 · +4h</p>
       </div>
     );
   }
   if (id === "documents") {
     return (
       <div className="mt-6 grid gap-2 text-sm">
-        <p className="border border-sf-line px-3 py-2">BOL · Verified</p>
-        <p className="border border-sf-line px-3 py-2">Packing list · Verified</p>
-        <p className="border border-sf-line px-3 py-2">POD · Pending</p>
+        {["BOL · Verified", "Packing list · Verified", "POD · Pending"].map((row) => (
+          <p key={row} className="row-live rounded-[10px] border border-sf-line px-3 py-2">
+            {row}
+          </p>
+        ))}
       </div>
     );
   }
   if (id === "routes") {
     return (
       <div className="mt-6 space-y-2 text-sm">
-        <p className="flex justify-between border border-sf-blue bg-sf-blue-pale px-3 py-2">
+        <p className="row-live flex justify-between rounded-[10px] border border-sf-blue bg-sf-blue-pale px-3 py-2">
           Rail + dray <span className="mono">4d / $1,840</span>
         </p>
-        <p className="flex justify-between border border-sf-line px-3 py-2">
+        <p className="row-live flex justify-between rounded-[10px] border border-sf-line px-3 py-2">
           Truck direct <span className="mono">2d / $2,610</span>
         </p>
       </div>
@@ -80,7 +89,7 @@ function CapabilityVisual({ id }: { id: string }) {
   if (id === "network") {
     return (
       <svg viewBox="0 0 260 80" className="mt-6 w-full" aria-hidden="true">
-        <polyline fill="none" stroke="#1E63FF" strokeWidth="2" points="0,60 40,48 80,52 120,28 160,34 200,16 260,22" />
+        <polyline className="route-dash" fill="none" stroke="#1E63FF" strokeWidth="2" points="0,60 40,48 80,52 120,28 160,34 200,16 260,22" />
       </svg>
     );
   }
