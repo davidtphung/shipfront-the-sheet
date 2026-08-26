@@ -1,7 +1,7 @@
 "use client";
 
-import { type ButtonHTMLAttributes, type PointerEvent, type ReactNode, useState } from "react";
-import { motion } from "framer-motion";
+import { type ButtonHTMLAttributes, type PointerEvent, type ReactNode, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { easeOutExpo, usePrefersReducedMotion } from "@/lib/motion";
 import { cx } from "@/lib/utils";
 
@@ -25,6 +25,9 @@ function useCardSpot() {
     spot,
     reduced,
     onPointerMove,
+    onPointerEnter: () => {
+      if (!reduced) setSpot((current) => ({ ...current, on: true }));
+    },
     onPointerLeave: () => setSpot((current) => ({ ...current, on: false })),
   };
 }
@@ -62,7 +65,7 @@ export function CardSurface({
   onClick?: ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
   onFocus?: ButtonHTMLAttributes<HTMLButtonElement>["onFocus"];
 }) {
-  const { spot, onPointerMove, onPointerLeave } = useCardSpot();
+  const { spot, onPointerMove, onPointerEnter, onPointerLeave } = useCardSpot();
   const classNames = cx(
     "dynamic-card group relative overflow-hidden",
     padded && "p-6",
@@ -84,6 +87,7 @@ export function CardSurface({
         className={classNames}
         onClick={onClick}
         onFocus={onFocus}
+        onPointerEnter={onPointerEnter}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
       >
@@ -93,7 +97,12 @@ export function CardSurface({
   }
 
   return (
-    <Tag className={classNames} onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
+    <Tag
+      className={classNames}
+      onPointerEnter={onPointerEnter}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+    >
       {body}
     </Tag>
   );
@@ -113,14 +122,16 @@ export function DynamicCard({
   tone?: "light" | "night";
 }) {
   const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.22 });
 
   return (
     <motion.div
+      ref={ref}
       layout={false}
       className={cx("h-full", className)}
       initial={reduced ? false : { opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.28 }}
+      animate={reduced || inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
       whileHover={reduced ? undefined : { y: -7, transition: { duration: 0.28, delay: 0, ease: easeOutExpo } }}
       transition={{ duration: 0.45, delay, ease: easeOutExpo }}
     >
