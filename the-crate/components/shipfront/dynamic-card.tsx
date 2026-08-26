@@ -1,7 +1,7 @@
 "use client";
 
-import { type ButtonHTMLAttributes, type PointerEvent, type ReactNode, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { type ButtonHTMLAttributes, type PointerEvent, type ReactNode, useState } from "react";
+import { motion } from "framer-motion";
 import { easeOutExpo, usePrefersReducedMotion } from "@/lib/motion";
 import { cx } from "@/lib/utils";
 
@@ -122,17 +122,14 @@ export function DynamicCard({
   tone?: "light" | "night";
 }) {
   const reduced = usePrefersReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.22 });
 
   return (
     <motion.div
-      ref={ref}
       layout={false}
       className={cx("h-full", className)}
-      initial={reduced ? false : { opacity: 0, y: 28 }}
-      animate={reduced || inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-      whileHover={reduced ? undefined : { y: -7, transition: { duration: 0.28, delay: 0, ease: easeOutExpo } }}
+      initial={reduced ? false : { y: 16 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, amount: 0.12, margin: "80px 0px" }}
       transition={{ duration: 0.45, delay, ease: easeOutExpo }}
     >
       <CardSurface as={Tag} tone={tone} className="h-full rounded-[16px]">
