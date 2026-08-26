@@ -2,3 +2,6 @@
 agent-tools/
 substrate-how-it-works.png
 .DS_Store
+the-crate/node_modules/
+the-crate/.next/
+the-crate/out/

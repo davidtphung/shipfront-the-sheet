@@ -20,4 +20,5 @@ jobs:
           publish_dir: .
           publish_branch: gh-pages
           force_orphan: false
+          exclude_assets: the-crate,.github
           commit_message: Publish THE SHEET sit
