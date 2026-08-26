@@ -1,0 +1,48 @@
+import type { Exception } from "@/types/shipfront";
+
+export const exceptions: Exception[] = [
+  {
+    id: "ex-01",
+    severity: "critical",
+    title: "Port congestion could delay SF-2408-1223 by 18 hours.",
+    shipmentId: "SF-2408-1223",
+    impact: "Delivery promise at risk",
+    recommendedAction: "Reserve alternate rail capacity",
+    owner: "Unassigned",
+    etaImpact: "+18h",
+    timeRemaining: "03h 42m",
+  },
+  {
+    id: "ex-02",
+    severity: "watch",
+    title: "Dwell rising at Colton for SF-2408-1187.",
+    shipmentId: "SF-2408-1187",
+    impact: "ETA still inside promise",
+    recommendedAction: "Hold customer update until 11:00 PDT",
+    owner: "Maya Chen",
+    etaImpact: "+4h",
+    timeRemaining: "06h 10m",
+  },
+  {
+    id: "ex-03",
+    severity: "critical",
+    title: "No owner on delayed Rotterdam move SF-2408-1231.",
+    shipmentId: "SF-2408-1231",
+    impact: "Customer SLA clock running",
+    recommendedAction: "Assign ocean desk and notify consignee",
+    owner: "Unassigned",
+    etaImpact: "+36h",
+    timeRemaining: "01h 18m",
+  },
+  {
+    id: "ex-04",
+    severity: "resolved",
+    title: "Dallas pickup recovered after missed gate.",
+    shipmentId: "SF-2408-1249",
+    impact: "Promise held",
+    recommendedAction: "Close the thread",
+    owner: "Priya Shah",
+    etaImpact: "0h",
+    timeRemaining: "Closed",
+  },
+];

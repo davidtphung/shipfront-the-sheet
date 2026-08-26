@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+:root {
+  --sf-canvas: #ffffff;
+  --sf-paper: #ffffff;
+  --sf-ink: #101111;
+  --sf-muted: #656b70;
+  --sf-line: #d7dbd8;
+  --sf-soft: #ecefea;
+  --sf-blue: #1e63ff;
+  --sf-blue-dark: #1647ba;
+  --sf-blue-pale: #e7eeff;
+  --sf-lime: #c7ff3d;
+  --sf-lime-dark: #78a600;
+  --sf-orange: #ff8a38;
+  --sf-red: #ed4b4b;
+  --sf-green: #20a86b;
+  --sf-night: #0b0f13;
+  --sf-night-surface: #111820;
+  --sf-night-line: rgba(255, 255, 255, 0.13);
+  --sf-night-text: #f4f7f3;
+  --sf-night-muted: #a7b0b9;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-sf-canvas: var(--sf-canvas);
+  --color-sf-paper: var(--sf-paper);
+  --color-sf-ink: var(--sf-ink);
+  --color-sf-muted: var(--sf-muted);
+  --color-sf-line: var(--sf-line);
+  --color-sf-soft: var(--sf-soft);
+  --color-sf-blue: var(--sf-blue);
+  --color-sf-blue-dark: var(--sf-blue-dark);
+  --color-sf-blue-pale: var(--sf-blue-pale);
+  --color-sf-lime: var(--sf-lime);
+  --color-sf-lime-dark: var(--sf-lime-dark);
+  --color-sf-orange: var(--sf-orange);
+  --color-sf-red: var(--sf-red);
+  --color-sf-green: var(--sf-green);
+  --color-sf-night: var(--sf-night);
+  --color-sf-night-surface: var(--sf-night-surface);
+  --color-sf-night-line: var(--sf-night-line);
+  --color-sf-night-text: var(--sf-night-text);
+  --color-sf-night-muted: var(--sf-night-muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sf: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--sf-canvas);
+  color: var(--sf-ink);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+::selection {
+  background: var(--sf-blue);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sf-ink);
+  outline-offset: 3px;
+}
+
+.display {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sf-muted);
+}
+
+.mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.grid-field {
+  background-image:
+    linear-gradient(to right, rgba(16, 17, 17, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 17, 17, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.night-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.marquee-left {
+  animation-name: marquee-left;
+  animation-duration: 36s;
+}
+
+.marquee-right {
+  animation-name: marquee-right;
+  animation-duration: 42s;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-duration: 16s;
+}
+
+@keyframes dash-move {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.route-dash {
+  stroke-dasharray: 6 8;
+  animation: dash-move 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-dash {
+    animation: none;
+  }
+
+  .dynamic-card,
+  .dynamic-card * {
+    transition: none !important;
+  }
+}
+
+.dynamic-card {
+  box-shadow: 0 0 0 rgba(16, 17, 17, 0);
+  transform: translateY(0);
+  transition:
+    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dynamic-card:hover,
+.dynamic-card:focus-within {
+  border-color: rgba(30, 99, 255, 0.45);
+  box-shadow: 0 18px 40px rgba(16, 17, 17, 0.08);
+  transform: translateY(-7px);
+}
+
+.dynamic-card.night-card:hover,
+.dynamic-card.night-card:focus-within {
+  border-color: rgba(30, 99, 255, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.card-spot {
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.row-live {
+  transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.row-live:hover,
+.row-live:focus-visible {
+  background: var(--sf-blue-pale);
+}
+
+.live-dot {
+  animation: live-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
