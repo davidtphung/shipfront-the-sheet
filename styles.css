@@ -467,6 +467,13 @@ h2 {
   }
 }
 
+@media print {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Why Shipfront. The argument. */
 
 .why {
@@ -506,6 +513,10 @@ h2 {
 
 .claims li + li {
   margin-top: 14px;
+}
+
+.why-cta {
+  margin-top: clamp(32px, 5vw, 48px);
 }
 
 .proofs {
@@ -929,13 +940,28 @@ h2 {
     flex-wrap: wrap;
     min-height: 0;
     padding: 12px 0 16px;
-    gap: 8px 16px;
+    gap: 0;
   }
 
   .nav-links {
     width: 100%;
-    justify-content: space-between;
-    gap: 8px 16px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0 20px;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    min-height: 40px;
+  }
+
+  .nav-links li:last-child {
+    flex: 0 0 100%;
+    margin-top: 8px;
+  }
+
+  .nav-links li:last-child .cta {
+    padding: 12px 20px;
   }
 
   .hero h1 {
