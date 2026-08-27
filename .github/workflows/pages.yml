@@ -13,14 +13,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Carry main onto gh-pages
+      - name: Restore stills and faces
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin gh-pages
-          git checkout -B gh-pages origin/gh-pages
-          git merge --no-edit -X theirs origin/main
-          git push origin gh-pages
+          mkdir -p images fonts
+          curl -fsSL -o images/logistics-usa.jpg https://davidtphung.github.io/shipfront-the-crate/images/logistics-usa.jpg
+          curl -fsSL -o images/procurement.jpg https://davidtphung.github.io/shipfront-the-crate/images/procurement.jpg
+          curl -fsSL -o images/fulfillment.jpg https://davidtphung.github.io/shipfront-the-crate/images/fulfillment.jpg
+          curl -fsSL -o images/integration.jpg https://davidtphung.github.io/shipfront-the-crate/images/integration.jpg
+          echo "01268520751d59bf9762d2d7d7c3e1555ba60c8d  images/logistics-usa.jpg" | sha1sum -c
+          curl -fsSL -o fonts/space-grotesk-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-400-normal.woff2
+          curl -fsSL -o fonts/space-grotesk-700.woff2 https://cdn.jsdelivr.net/fontsource/fonts/space-grotesk@latest/latin-700-normal.woff2
+          curl -fsSL -o fonts/geist-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-400-normal.woff2
+          curl -fsSL -o fonts/geist-500.woff2 https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-500-normal.woff2
+          curl -fsSL -o fonts/jetbrains-mono-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.woff2
+          curl -fsSL -o fonts/jetbrains-mono-700.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-700-normal.woff2
+      - name: Lock check
+        run: |
+          set -euo pipefail
+          test "$(find . -name '*.html' -not -path './.git/*' | wc -l)" -eq 4
+          grep -q 'You Sell. We Ship.' index.html
+          grep -q 'Built by David T Phung' index.html
+          grep -q '1933 S. Broadway' contact/index.html
+          grep -q 'mailto:info@myshipfront.com' contact/index.html
+          grep -q '#FF6A00' styles.css
+          ! grep -rqP '[\x{2010}-\x{2015}\x{2212}]' --include='*.html' --include='*.css' --include='*.js' --include='*.md' .
+          ! grep -rq 'role="tab"' --include='*.html' .
+      - name: Publish to gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --quiet --depth 1 --branch gh-pages "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" /tmp/pages
+          rsync -a --delete --exclude '.git/' --exclude '.gitignore' ./ /tmp/pages/
+          rm -f /tmp/pages/.gitignore
+          cd /tmp/pages
+          git add -A
+          if git diff --cached --quiet; then
+            echo "gh-pages already matches main"
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit --quiet -m "Publish ${GITHUB_SHA}"
+          git push --quiet origin gh-pages

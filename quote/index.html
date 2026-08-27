@@ -6,10 +6,8 @@
   <title>Get a Quote | Shipfront</title>
   <meta name="description" content="Request a Shipfront quote. Name, email, and company.">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link rel="preload" href="../fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
-  <script>document.documentElement.className += " js";</script>
+  <noscript><style>[data-reveal],.clip > span{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -29,12 +27,17 @@
           </svg>
           <span class="wordmark">SHIPFRONT</span>
         </a>
+
         <ul class="nav-links">
-          <li><a href="../#how">How it works</a></li>
           <li><a href="../#why">Why Shipfront</a></li>
           <li><a href="../contact/">Contact</a></li>
           <li><a class="cta" href="../quote/" aria-current="page">Get a Quote</a></li>
         </ul>
+
+        <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-menu">
+          <span class="bars" aria-hidden="true"></span>
+          <span>Menu</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -42,43 +45,28 @@
   <main id="main">
     <div class="wrap">
       <section class="page">
-        <p class="eyebrow">Quote</p>
-        <h1>Get a Quote</h1>
-        <p class="page-lead">Name, email, and company. This form stays in your browser. Nothing is posted to a server. Use info@myshipfront.com if you want the note to land.</p>
+        <p class="kicker" data-reveal>Quote</p>
+        <h1 class="clip" data-clip style="--i:1"><span>Get a Quote</span></h1>
+        <p class="page-lead" data-reveal style="--i:2">Name, email, and company. This form stays in your browser. Nothing is posted to a server. Use info@myshipfront.com if you want the note to land.</p>
 
-        <div class="page-grid">
-          <div class="page-main">
-            <form class="form" data-sheet-form novalidate>
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" autocomplete="name" required>
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" autocomplete="email" required>
-              </div>
-              <div class="field">
-                <label for="company">Company</label>
-                <input id="company" name="company" type="text" autocomplete="organization" required>
-              </div>
-              <p class="form-note">We will ask about volume and what you ship after we reply.</p>
-              <button class="cta" type="submit">Submit request</button>
-            </form>
-
-            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+        <form class="form" data-sheet-form novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
           </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization" required>
+          </div>
+          <p class="form-note">No phone. We will ask about volume and what you ship after we reply.</p>
+          <button class="cta" type="submit">Submit request</button>
+        </form>
 
-          <aside class="aside" aria-labelledby="aside-heading">
-            <p class="aside-key" id="aside-heading">What you are quoting</p>
-            <ul class="aside-list">
-              <li>Warehousing</li>
-              <li>Fulfillment</li>
-              <li>eCommerce Integrations</li>
-              <li>Location</li>
-            </ul>
-            <p class="aside-note">The four reasons in full sit on the home page under <a href="../#why">Why Shipfront</a>.</p>
-          </aside>
-        </div>
+        <div id="form-status" class="form-status" data-form-status role="status" aria-live="polite"></div>
       </section>
     </div>
   </main>
@@ -90,6 +78,22 @@
       <span class="byline">Built by David T Phung</span>
     </div>
   </footer>
+
+  <div class="sheet sheet--menu" id="nav-menu" data-sheet="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <button class="sheet-scrim" type="button" tabindex="-1" aria-hidden="true" data-sheet-dismiss></button>
+    <div class="sheet-panel" data-sheet-panel tabindex="-1">
+      <div class="sheet-grab" data-sheet-grab aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2>Menu</h2>
+        <button class="sheet-close" type="button" data-sheet-dismiss>Close</button>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../#why">Why Shipfront</a></li>
+        <li><a href="../contact/">Contact</a></li>
+        <li><a class="cta" href="../quote/" aria-current="page">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
 
   <script src="../script.js"></script>
 </body>
