@@ -5,17 +5,12 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-  pages: write
-  id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - name: Restore stills and faces
@@ -33,8 +28,32 @@ jobs:
           curl -fsSL -o fonts/geist-500.woff2 https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-500-normal.woff2
           curl -fsSL -o fonts/jetbrains-mono-400.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.woff2
           curl -fsSL -o fonts/jetbrains-mono-700.woff2 https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-700-normal.woff2
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Lock check
+        run: |
+          set -euo pipefail
+          test "$(find . -name '*.html' -not -path './.git/*' | wc -l)" -eq 4
+          grep -q 'You Sell. We Ship.' index.html
+          grep -q 'Built by David T Phung' index.html
+          grep -q '1933 S. Broadway' contact/index.html
+          grep -q 'mailto:info@myshipfront.com' contact/index.html
+          grep -q '#FF6A00' styles.css
+          ! grep -rqP '[\x{2010}-\x{2015}\x{2212}]' --include='*.html' --include='*.css' --include='*.js' --include='*.md' .
+          ! grep -rq 'role="tab"' --include='*.html' .
+      - name: Publish to gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git clone --quiet --depth 1 --branch gh-pages "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" /tmp/pages
+          rsync -a --delete --exclude '.git/' --exclude '.gitignore' ./ /tmp/pages/
+          rm -f /tmp/pages/.gitignore
+          cd /tmp/pages
+          git add -A
+          if git diff --cached --quiet; then
+            echo "gh-pages already matches main"
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit --quiet -m "Publish ${GITHUB_SHA}"
+          git push --quiet origin gh-pages
