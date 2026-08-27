@@ -6,7 +6,10 @@
   <title>Contact | Shipfront</title>
   <meta name="description" content="Visit Shipfront at 1933 S. Broadway, Los Angeles CA 90007.">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preload" href="../fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
+  <script>document.documentElement.className += " js";</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -27,6 +30,7 @@
           <span class="wordmark">SHIPFRONT</span>
         </a>
         <ul class="nav-links">
+          <li><a href="../#how">How it works</a></li>
           <li><a href="../#why">Why Shipfront</a></li>
           <li><a href="../contact/" aria-current="page">Contact</a></li>
           <li><a class="cta" href="../quote/">Get a Quote</a></li>
@@ -53,7 +57,7 @@
           </div>
           <div>
             <h2>Hours</h2>
-            <p>Monday - Friday: 9 am - 5 pm<br>Saturday - Sunday: Appointment only</p>
+            <p>Monday to Friday: 9 am to 5 pm<br>Saturday and Sunday: Appointment only</p>
           </div>
           <div>
             <h2>Email</h2>
@@ -61,24 +65,39 @@
           </div>
         </div>
 
-        <form class="form" data-sheet-form novalidate>
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="company">Company</label>
-            <input id="company" name="company" type="text" autocomplete="organization" required>
-          </div>
-          <p class="form-note">This form stays in your browser. Nothing is posted to a server.</p>
-          <button class="cta" type="submit">Send note</button>
-        </form>
+        <div class="page-grid">
+          <div class="page-main">
+            <form class="form" data-sheet-form novalidate>
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" autocomplete="organization" required>
+              </div>
+              <p class="form-note">This form stays in your browser. Nothing is posted to a server.</p>
+              <button class="cta" type="submit">Send note</button>
+            </form>
 
-        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+          </div>
+
+          <aside class="aside" aria-labelledby="aside-heading">
+            <p class="aside-key" id="aside-heading">Ready to price it</p>
+            <ul class="aside-list">
+              <li>Warehousing</li>
+              <li>Fulfillment</li>
+              <li>eCommerce Integrations</li>
+              <li>Location</li>
+            </ul>
+            <p class="aside-note">Skip ahead and <a href="../quote/">get a quote</a> instead.</p>
+          </aside>
+        </div>
       </section>
     </div>
   </main>

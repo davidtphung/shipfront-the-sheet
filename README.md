@@ -22,7 +22,9 @@ Or open `index.html` in a browser. Paths are relative, so Home, Quote, and Conta
 | Quote | `/quote/` |
 | Contact | `/contact/` |
 
-GitHub Pages: deploy the repo root. `.nojekyll` is in the tree.
+Stills live in `/images` and faces in `/fonts`. Both are tracked, so a clone renders with no network and no build step.
+
+GitHub Pages: the live tree is the `gh-pages` branch, served from `/`. `.nojekyll` is in the tree.
 
 ## Paint lock
 
@@ -31,15 +33,27 @@ GitHub Pages: deploy the repo root. `.nojekyll` is in the tree.
 | `--ground` | `#FFFFFF` | Page |
 | `--type` | `#000000` | Type, cube stroke, CTA label |
 | `--slate` | `#475569` | Muted line |
-| `--signal` | `#FF6A00` | CTA fill, How it works hairline, Why rule |
+| `--signal` | `#FF6A00` | CTA fill, number boxes, Why rule |
+| `--hair` | `rgba(0, 0, 0, 0.12)` | Section rules, step rail, field border |
 
-CTA is black on orange. No white on orange. No `#FF2D2D`.
+CTA is black on orange. No white on orange. No `#FF2D2D`. No `#1E63FF`. No lime.
 
 Type: Space Grotesk (display), Geist (UI), JetBrains Mono (numerals). Self-hosted `woff2` in `/fonts`. No Inter. No fourth face. Radius 0 to 4. No frost.
 
 Mark: 12-edge cube wireframe, path starts `M7 9 L12 6`, stroke `#000`.
 
 H1 on Home is exactly: You Sell. We Ship.
+
+## Page shape
+
+Home runs hero, How it works, Why Shipfront, conversion band. Section rhythm on every band is eyebrow, editorial H2, hairline or rule, then the content. Section H2s are Space Grotesk 400. Only H1, the wordmark, step labels, and proof names run 700.
+
+| Band | Container | Alignment |
+| --- | --- | --- |
+| Hero | 1120 | Left |
+| How it works | 860 | Centered |
+| Why Shipfront | 1120 | Left |
+| Conversion | 1120 | Left, two columns |
 
 ## How it works
 
@@ -56,7 +70,8 @@ Measured sit of [joinsubstrate.com/#sellers-how-it-works](https://www.joinsubstr
 | Container | 860px centered, band pad 64px 0 | same |
 | Columns | three at 287px, 0 gutter | Inbound, Floor, Ship |
 | Type | 14 / 32, h2 lh 1.1 tracking -0.02em, body 14 / 1.4 | same, Space Grotesk (their Rhymes serif left) |
-| Numbers | baked PNG chips + diagonal hatch | real DOM, 1px signal box, JetBrains 1 2 3. No hatch |
+| H2 weight | 400 | 400 |
+| Sequence rail | baked PNG chips joined by a diagonal hatch | real DOM: 1px signal box, JetBrains 1 2 3, joined by a 1px `--hair` rail that stops 24px short of the next box. No hatch |
 | Nav | `position: relative` | same. Not sticky |
 | Reveal | fade-up, ~80ms stagger per column | same. No hover transform on steps |
 | Hero wash | `#56ACF7` to `#AF9160` | left there. No sky-to-amber on Shipfront |
@@ -64,13 +79,29 @@ Measured sit of [joinsubstrate.com/#sellers-how-it-works](https://www.joinsubstr
 
 H2: From inbound to the customer.
 
+Step copy is capped at 240px so columns do not collide at a zero gutter. Substrate does the same: their 287 column carries a 226 text block.
+
 ## Why Shipfront
 
-`#why` heading, signal rule, alternating image and copy rows, static `ul.chips`, CTA to `/quote/`. Nav Why link scrolls to `#why`. No `role=tab`. No selected chip.
+`#why` is the argument, not a list.
+
+1. Eyebrow `Why Shipfront`.
+2. Editorial H2: Logistics should not be the reason growth stalls. 52 / 55.12 / -0.03em, weight 400.
+3. Signal rule, 48 x 2.
+4. Claim stack: four lines at 26 / 30.68 in `#475569`, one per reason, in the order the proofs run.
+5. Conversion: Get a Quote, plus a quiet Contact link.
+6. Four proof rows, hairline separated, 72px band padding, alternating still and copy. Each carries a mono numeral in a 34px signal box, the reason name at 34 / 700, a claim line at 17 / 500 in ink, and body at 15 / 1.6 in `#475569`.
+7. Capability strip: static `ul.chips` behind a mono key.
+
+Order is locked: Warehousing, Fulfillment, eCommerce Integrations, Location. No `role=tab`. No selected chip. Nav Why link scrolls to `#why`, nav How link scrolls to `#how`.
+
+The conversion band closes the page: Get started, Tell us what you ship, and the Get a Quote pair.
+
+Copy is recut from Shipfront's own product copy. No WMS vendor, no FDA claim, no phone number, no tracking UI, no metrics.
 
 ## Form
 
-Quote and Contact require Name, Email, Company. No phone. No SKUs. No what-you-ship field.
+Quote and Contact require Name, Email, Company. No phone. No SKUs. No what-you-ship field. Both pages carry a numbered aside listing the same four reasons, so the argument follows the visitor into the form.
 
 Success copy:
 
@@ -89,21 +120,28 @@ Contrast, WCAG 2 relative luminance, Python, 2026-08-25:
 | `#475569` on `#FFFFFF` | 7.58:1 | measured, muted body |
 | `#FF6A00` on `#FFFFFF` | 2.87:1 | measured, not used as small type |
 
-Band sit remeasured on THE SHEET at viewport 1440x900 (Playwright, 2026-08-25):
+Band sit remeasured on THE SHEET at viewport 1440x900 (Playwright, 2026-08-26):
 
 | Token | Target | Measured |
 | --- | --- | --- |
 | `.floor-inner` width | 860 | 860 |
 | `.floor` pad | 64 0 | 64 / 64 |
 | `.step` width | 287, gutter 0 | 287 / 287 / 287 |
-| `.floor h2` | 32 / 1.1 / -0.02em | 32px / 35.2px / -0.64px |
+| `.floor h2` | 32 / 1.1 / -0.02em / 400 | 32px / 35.2px / -0.64px / 400 |
 | `.step p` | 14 / 1.4 | 14px / 19.6px |
 | eyebrow | `#475569` | `rgb(71, 85, 105)` |
 | nav | `relative` | `relative` |
 | CTA | pad 12, radius 4, `#000` on `#FF6A00` | 12 / 4 / `rgb(0,0,0)` on `rgb(255,106,0)` |
 | step chrome | radius 0, border 0, shadow none, pad 0 | all match |
+| `.wrap` | 1120 | 1120 |
+| `.why-head h2` | 52 / 1.06 / -0.03em / 400 | 52px / 55.12px / -1.56px / 400 |
+| `.claims li` | 26, `#475569` | 26px / 30.68px / `rgb(71, 85, 105)` |
+| `.proof` | pad 72 0, hairline top | 72 / 72, `rgba(0,0,0,0.12)` |
+| `.proof-num` | 34 box, signal hairline | 34x34, `rgb(255,106,0)` |
 
-fps: assumed, not measured. No `requestAnimationFrame` loop. Step fade-up duration 240ms is assumed. Stagger 80ms is from the sit. Translate 12px is assumed. Number box 28px is assumed. Still grain is a static SVG overlay.
+Reference type rhythm read off joinsubstrate.com at 1440w on the same day: eyebrow 14 / 15.4 at 40% ink, section H2 32 / 35.2 / -0.64px at weight 400, argument line 24 / 26.4 / -0.48px in muted ink, step label 14 caps, step body 14 / 19.6, CTA radius 4 pad 12. Those ratios are what THE SHEET reuses. Their faces, palette, wording, financing copy, product screenshots, and page count are left there.
+
+fps: assumed, not measured. No `requestAnimationFrame` loop. Step fade-up duration 240ms is assumed. Stagger 80ms is from the sit. Translate 12px is assumed. Number box 28px on the floor band and 34px on the proofs is assumed. Still grain is a static SVG overlay. Reveal runs on IntersectionObserver at threshold 0 with an 8% bottom margin, is skipped entirely under `prefers-reduced-motion`, and is disabled in print.
 
 `logistics-usa.jpg` lock: sha1 `01268520751d59bf9762d2d7d7c3e1555ba60c8d`, 376501 bytes, measured after copy.
 
