@@ -6,9 +6,11 @@
   <title>Not found | Shipfront</title>
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <link rel="stylesheet" href="./styles.css">
+  <noscript><style>[data-reveal],.clip > span{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+
   <header class="site-header" data-nav>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
@@ -24,24 +26,32 @@
           </svg>
           <span class="wordmark">SHIPFRONT</span>
         </a>
+
         <ul class="nav-links">
           <li><a href="./#why">Why Shipfront</a></li>
           <li><a href="./contact/">Contact</a></li>
           <li><a class="cta" href="./quote/">Get a Quote</a></li>
         </ul>
+
+        <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-menu">
+          <span class="bars" aria-hidden="true"></span>
+          <span>Menu</span>
+        </button>
       </nav>
     </div>
   </header>
+
   <main id="main">
     <div class="wrap">
       <section class="page">
-        <p class="eyebrow">404</p>
-        <h1>Page not found.</h1>
-        <p class="page-lead">That path is not on this site. Home, Quote, and Contact are the three pages.</p>
-        <a class="cta" href="./">Back to Shipfront</a>
+        <p class="kicker" data-reveal>404</p>
+        <h1 class="clip" data-clip style="--i:1"><span>Page not found.</span></h1>
+        <p class="page-lead" data-reveal style="--i:2">That path is not on this site. Home, Quote, and Contact are the three pages.</p>
+        <a class="cta" href="./" data-reveal style="--i:3">Back to Shipfront</a>
       </section>
     </div>
   </main>
+
   <footer class="site-footer">
     <div class="wrap footer-row">
       <span>1933 S. Broadway, Los Angeles CA 90007</span>
@@ -49,6 +59,23 @@
       <span class="byline">Built by David T Phung</span>
     </div>
   </footer>
+
+  <div class="sheet sheet--menu" id="nav-menu" data-sheet="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <button class="sheet-scrim" type="button" tabindex="-1" aria-hidden="true" data-sheet-dismiss></button>
+    <div class="sheet-panel" data-sheet-panel tabindex="-1">
+      <div class="sheet-grab" data-sheet-grab aria-hidden="true"></div>
+      <div class="sheet-head">
+        <h2>Menu</h2>
+        <button class="sheet-close" type="button" data-sheet-dismiss>Close</button>
+      </div>
+      <ul class="nav-links">
+        <li><a href="./#why">Why Shipfront</a></li>
+        <li><a href="./contact/">Contact</a></li>
+        <li><a class="cta" href="./quote/">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+
   <script src="./script.js"></script>
 </body>
 </html>
