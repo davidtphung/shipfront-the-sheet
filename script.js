@@ -1,46 +1,49 @@
 /* THE SHEET. Local form only. No fetch. No analytics. */
 
 (function () {
-  var steps = document.querySelectorAll(".step");
+  var reveals = document.querySelectorAll("[data-reveal]");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function showSteps() {
-    steps.forEach(function (step) {
-      step.classList.add("is-in");
+  function show(list) {
+    Array.prototype.forEach.call(list, function (el) {
+      el.classList.add("is-in");
     });
   }
 
-  var floor = document.querySelector(".floor");
-  if (steps.length) {
-    if (reduce || !("IntersectionObserver" in window) || !floor) {
-      showSteps();
+  if (reveals.length) {
+    if (reduce || !("IntersectionObserver" in window)) {
+      show(reveals);
     } else {
       var io = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              showSteps();
-              io.disconnect();
-            }
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
           });
         },
-        { threshold: 0.2 }
+        { threshold: 0, rootMargin: "0px 0px -8% 0px" }
       );
-      io.observe(floor);
+      Array.prototype.forEach.call(reveals, function (el) {
+        io.observe(el);
+      });
     }
   }
 
-  document.querySelectorAll('a[href*="#why"]').forEach(function (link) {
+  document.querySelectorAll('a[href*="#"]').forEach(function (link) {
+    var url = new URL(link.href, window.location.href);
+    var hash = url.hash;
+    if (!hash || hash.length < 2) return;
+    if (url.pathname !== window.location.pathname) return;
+
     link.addEventListener("click", function (event) {
-      var url = new URL(link.href, window.location.href);
-      if (url.pathname !== window.location.pathname && url.pathname !== window.location.pathname + "index.html") {
-        return;
-      }
-      var target = document.getElementById("why");
+      var target = document.querySelector(hash);
       if (!target) return;
       event.preventDefault();
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+      var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      target.scrollIntoView({ behavior: still ? "auto" : "smooth" });
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
     });
   });
 
