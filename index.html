@@ -6,7 +6,10 @@
   <title>Shipfront | You Sell. We Ship.</title>
   <meta name="description" content="Shipfront warehousing and fulfillment in downtown Los Angeles. You sell. We ship.">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="preload" href="./fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./styles.css">
+  <script>document.documentElement.className += " js";</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -27,6 +30,7 @@
           <span class="wordmark">SHIPFRONT</span>
         </a>
         <ul class="nav-links">
+          <li><a href="#how">How it works</a></li>
           <li><a href="#why">Why Shipfront</a></li>
           <li><a href="./contact/">Contact</a></li>
           <li><a class="cta" href="./quote/">Get a Quote</a></li>
@@ -41,27 +45,53 @@
         <p class="eyebrow">Warehousing and fulfillment</p>
         <h1>You Sell. We Ship.</h1>
         <p class="lead">Shipfront helps eCommerce merchants scale by taking care of their logistics needs, so they can focus on growing their business.</p>
-        <a class="cta" href="./quote/">Get a Quote</a>
+        <div class="cta-row">
+          <a class="cta" href="./quote/">Get a Quote</a>
+          <a class="quiet-link" href="#how">See how it works</a>
+        </div>
+        <ul class="facts">
+          <li>
+            <span class="fact-key">Floor</span>
+            <span class="fact-value">1933 S. Broadway, Los Angeles</span>
+          </li>
+          <li>
+            <span class="fact-key">Scope</span>
+            <span class="fact-value">Inbound, storage, pick, pack, outbound</span>
+          </li>
+          <li>
+            <span class="fact-key">Outbound</span>
+            <span class="fact-value">Carrier, last-mile, and same-day</span>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <section class="floor" id="floor" aria-labelledby="floor-heading">
+    <section class="floor" id="how" aria-labelledby="how-heading">
       <div class="floor-inner">
         <p class="eyebrow">How it works</p>
-        <h2 id="floor-heading">From inbound to the customer.</h2>
+        <h2 id="how-heading">From inbound to the customer.</h2>
         <ol class="steps">
-          <li class="step">
-            <span class="step-num">1</span>
+          <li class="step" data-reveal>
+            <span class="step-rail">
+              <span class="step-num">1</span>
+              <span class="step-line" aria-hidden="true"></span>
+            </span>
             <h3>Inbound</h3>
             <p>Freight lands at 1933 S. Broadway. We receive it and check it in.</p>
           </li>
-          <li class="step">
-            <span class="step-num">2</span>
+          <li class="step" data-reveal>
+            <span class="step-rail">
+              <span class="step-num">2</span>
+              <span class="step-line" aria-hidden="true"></span>
+            </span>
             <h3>Floor</h3>
             <p>Storage, kitting, pick, pack, and label stay on our floor.</p>
           </li>
-          <li class="step">
-            <span class="step-num">3</span>
+          <li class="step" data-reveal>
+            <span class="step-rail">
+              <span class="step-num">3</span>
+              <span class="step-line" aria-hidden="true"></span>
+            </span>
             <h3>Ship</h3>
             <p>Outbound through carriers and same-day partners to the customer.</p>
           </li>
@@ -72,62 +102,94 @@
     <section class="why" id="why" aria-labelledby="why-heading">
       <div class="wrap">
         <div class="why-head">
-          <h2 id="why-heading">Why Shipfront</h2>
+          <p class="eyebrow">Why Shipfront</p>
+          <h2 id="why-heading">Logistics should not be the reason growth stalls.</h2>
           <hr class="signal-rule">
+          <ul class="claims">
+            <li>Store it in space built for inventory.</li>
+            <li>Pick, pack, and label it the way you want.</li>
+            <li>Connect your store to our floor.</li>
+            <li>Ship it from where the freeways meet.</li>
+          </ul>
         </div>
 
-        <article class="why-row">
-          <figure class="still">
-            <img src="./images/procurement.jpg" width="800" height="1080" alt="Warehouse rack with shrink-wrapped pallets on the inbound floor">
-          </figure>
-          <div class="why-copy">
-            <h3>Warehousing</h3>
-            <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers. Inventory is tracked across every SKU so we know where it sits, how long it has been there, and the quantity on hand.</p>
+        <ol class="proofs">
+          <li class="proof" data-reveal>
+            <figure class="still">
+              <img src="./images/procurement.jpg" width="800" height="1080" alt="Warehouse rack with shrink-wrapped pallets on the inbound floor" decoding="async">
+            </figure>
+            <div class="proof-copy">
+              <span class="proof-num">01</span>
+              <h3>Warehousing</h3>
+              <p class="proof-claim">Space, security, and temperature control.</p>
+              <p class="proof-body">Our warehouses hold your product before it ships, with the space, security, and temperature control it needs. Inventory is tracked across every SKU, so we know where it sits, how long it has been there, and the quantity on hand.</p>
+            </div>
+          </li>
+
+          <li class="proof proof--flip" data-reveal>
+            <figure class="still">
+              <img src="./images/fulfillment.jpg" width="800" height="1080" alt="High-angle pick floor with yellow bins" loading="lazy" decoding="async">
+            </figure>
+            <div class="proof-copy">
+              <span class="proof-num">02</span>
+              <h3>Fulfillment</h3>
+              <p class="proof-claim">Your order, packed your way.</p>
+              <p class="proof-body">We build custom workflows to pick, pack, label, and ship your products exactly how you would like. That means working with any carrier across traditional partners, as well as last-mile and same-day delivery.</p>
+            </div>
+          </li>
+
+          <li class="proof" data-reveal>
+            <figure class="still">
+              <img src="./images/integration.jpg" width="800" height="1080" alt="Warehouse aisle with a worker on a pallet jack" loading="lazy" decoding="async">
+            </figure>
+            <div class="proof-copy">
+              <span class="proof-num">03</span>
+              <h3>eCommerce Integrations</h3>
+              <p class="proof-claim">The store talks to the floor.</p>
+              <p class="proof-body">Shipfront connects to the platforms you already sell on and the carriers you already ship with, from eCommerce storefronts to same-day delivery services. Orders arrive as work on the floor instead of a list someone has to retype.</p>
+            </div>
+          </li>
+
+          <li class="proof proof--flip" data-reveal>
+            <figure class="still">
+              <img src="./images/logistics-usa.jpg" width="2400" height="1596" alt="USA long-hood freight truck at a dock, unmarked" loading="lazy" decoding="async">
+            </figure>
+            <div class="proof-copy">
+              <span class="proof-num">04</span>
+              <h3>Location</h3>
+              <p class="proof-claim">Downtown L.A., next to the 10, 110, and 101.</p>
+              <p class="proof-body">We inbound your products at 1933 S. Broadway and move them out through carrier and same-day integrations. Easy access to interstate freeways, courier depots, train stations, and airports.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="strip">
+          <p class="strip-key">On the floor</p>
+          <ul class="chips">
+            <li>Inbound</li>
+            <li>Kitting</li>
+            <li>Storage</li>
+            <li>FBA Prep</li>
+            <li>Outbound</li>
+            <li>Last-Mile</li>
+            <li>Same-Day</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="convert" aria-labelledby="convert-heading">
+      <div class="wrap convert-inner">
+        <div>
+          <p class="eyebrow">Get started</p>
+          <h2 id="convert-heading">Tell us what you ship.</h2>
+        </div>
+        <div class="convert-side">
+          <p class="lead">Name, email, and company. A person at Shipfront replies, and we go from there.</p>
+          <div class="cta-row">
+            <a class="cta" href="./quote/">Get a Quote</a>
+            <a class="quiet-link" href="./contact/">Visit the floor</a>
           </div>
-        </article>
-
-        <article class="why-row why-row--flip">
-          <figure class="still">
-            <img src="./images/fulfillment.jpg" width="800" height="1080" alt="High-angle pick floor with yellow bins">
-          </figure>
-          <div class="why-copy">
-            <h3>Fulfillment</h3>
-            <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like. That means working with any carrier across traditional partners, as well as last-mile and same-day delivery.</p>
-          </div>
-        </article>
-
-        <article class="why-row">
-          <figure class="still">
-            <img src="./images/logistics-usa.jpg" width="2400" height="1596" alt="USA long-hood freight truck at a dock, unmarked">
-          </figure>
-          <div class="why-copy">
-            <h3>Location</h3>
-            <p>Situated in downtown L.A., next to the 10, 110, and 101 freeways. We inbound your products at 1933 S. Broadway and move them out through carrier and same-day integrations. Easy access to interstate freeways, courier depots, train stations, and airports.</p>
-          </div>
-        </article>
-
-        <article class="why-row why-row--flip">
-          <figure class="still">
-            <img src="./images/integration.jpg" width="800" height="1080" alt="Warehouse aisle with a worker on a pallet jack">
-          </figure>
-          <div class="why-copy">
-            <h3>Integrations</h3>
-            <p>Shipfront is built on the Flowspace Warehouse Management System (WMS). Through the WMS, Shipfront integrates with partners across the supply chain, from eCommerce platforms to same-day delivery services. The store talks to the floor.</p>
-          </div>
-        </article>
-
-        <ul class="chips">
-          <li>Inbound</li>
-          <li>Kitting</li>
-          <li>Storage</li>
-          <li>FBA Prep</li>
-          <li>Outbound</li>
-          <li>Last-Mile</li>
-          <li>Same-Day</li>
-        </ul>
-
-        <div class="why-cta">
-          <a class="cta" href="./quote/">Get a Quote</a>
         </div>
       </div>
     </section>
