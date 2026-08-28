@@ -232,7 +232,7 @@
     el.addEventListener("blur", release);
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll(".cta"), function (el) {
+  Array.prototype.forEach.call(document.querySelectorAll(".cta, .cta--ink"), function (el) {
     pressable(el);
   });
 

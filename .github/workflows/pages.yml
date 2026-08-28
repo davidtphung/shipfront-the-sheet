@@ -33,10 +33,27 @@ jobs:
           set -euo pipefail
           test "$(find . -name '*.html' -not -path './.git/*' | wc -l)" -eq 4
           grep -q 'You Sell. We Ship.' index.html
-          grep -q 'Built by David T Phung' index.html
+          grep -q 'The Reef' index.html
+          grep -q 'The Reef' contact/index.html
           grep -q '1933 S. Broadway' contact/index.html
           grep -q 'mailto:info@myshipfront.com' contact/index.html
+          grep -q 'Warehousing' index.html
+          grep -q 'Fulfillment' index.html
+          grep -q 'eCommerce Integrations' index.html
+          grep -q '>Location<' index.html
+          grep -q 'name="name"' quote/index.html
+          grep -q 'name="email"' quote/index.html
+          grep -q 'name="company"' quote/index.html
+          grep -q 'wordmark-bar' index.html
+          grep -q 'points="40,14 62,27 40,40 18,27"' index.html
+          grep -q 'x2="40" y2="66"' index.html
           grep -q '#FF6A00' styles.css
+          test "$(grep -h 'Built by David T Phung' index.html quote/index.html contact/index.html | wc -l)" -eq 3
+          ! grep -q 'type="tel"' --include='*.html' -r .
+          ! grep -qiE 'FDA|WMS|temperature|SLA' --include='*.html' -r .
+          ! grep -q 'M16 3.2' --include='*.html' --include='*.svg' -r .
+          ! grep -q '32x36' --include='*.html' --include='*.svg' -r .
+          ! grep -q 'viewBox="0 0 24 26"' --include='*.html' --include='*.svg' -r .
           ! grep -rqP '[\x{2010}-\x{2015}\x{2212}]' --include='*.html' --include='*.css' --include='*.js' --include='*.md' .
           ! grep -rq 'role="tab"' --include='*.html' .
       - name: Publish to gh-pages
