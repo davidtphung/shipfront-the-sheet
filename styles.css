@@ -1,6 +1,6 @@
 /* THE SHEET. Terminal lock. White ground. Black type. Cube. One accent. */
-/* #FF6A00 only on the wordmark bar and Get a Quote. CTA label is #000. */
-/* Cube: Kunal hex + inner Y, stem down, fill #000, square caps, miter. */
+/* #FF6A00 on the wordmark bar, Get a Quote, and cube stroke. CTA label is #000. */
+/* Cube: viewBox 0 0 24 26. Kunal hex + inner Y, stem down, fill #000, square caps, miter. */
 
 @font-face {
   font-family: "Space Grotesk";
@@ -187,9 +187,9 @@ a {
 
 .brand .mark {
   display: block;
-  width: 20px;
+  width: 18px;
   height: 20px;
-  flex: 0 0 20px;
+  flex: 0 0 18px;
 }
 
 .wordmark-bar {

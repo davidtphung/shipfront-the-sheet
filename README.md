@@ -33,17 +33,17 @@ Black, white, cube, one accent. Copy stays [myshipfront.com](https://www.myshipf
 | `--ground` | `#FFFFFF` | Page |
 | `--type` | `#000000` | Type, cube fill and stroke, ink buttons |
 | `--slate` | `#475569` | Muted line |
-| `--signal` | `#FF6A00` | Wordmark bar and Get a Quote fill only |
+| `--signal` | `#FF6A00` | Wordmark bar, Get a Quote fill, cube stroke |
 | `--hair` | `rgba(0,0,0,.06)` | Plate hairlines |
 | `--edge` | `rgba(0,0,0,.16)` | Input border, grabber |
 
-Orange `#FF6A00` is only on the wordmark bar and Get a Quote. CTA label is `#000` on the accent. No white on orange. No `#FF2D2D`. Chips, rules, steps, skip link, and form chrome stay black and white.
+Orange `#FF6A00` is the one accent: wordmark bar, Get a Quote fill, and cube stroke. CTA label is `#000` on the accent. No white on orange. No `#FF2D2D`. Ground stays `#FFFFFF`. Chips, rules, skip link, and form chrome stay black and white.
 
 Type: Space Grotesk (display), Geist (UI), JetBrains Mono (numerals and 11px caps). Self-hosted `woff2` in `/fonts`. No Inter. No fourth face. Radius 0 to 4. No frost. No cartoons. No em dashes.
 
 ## Mark
 
-Kunal hex + inner Y, stem down. Fill `#000`. Stroke `#000`. Square caps, miter. ViewBox `0 0 80 80`. Path starts `40,14`. Not a pip. Not `32x36`. Not `M16 3.2`.
+Kunal hex + inner Y, stem down. ViewBox `0 0 24 26`. Fill `#000`. Stroke `#FF6A00`. Square caps, miter. Hex `M12 6 L17 9 L17 16 L12 19 L7 16 L7 9 Z`. Y arms `M7 9 L12 12 L17 9`. Stem down `M12 12 L12 19`. Not a pip. Not `32x36`. Not `M16 3.2`. Not viewBox `80 80`.
 
 Wordmark bar: `SHIPFRONT` on `#FF6A00`, label `#000`.
 

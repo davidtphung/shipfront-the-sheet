@@ -45,15 +45,18 @@ jobs:
           grep -q 'name="email"' quote/index.html
           grep -q 'name="company"' quote/index.html
           grep -q 'wordmark-bar' index.html
-          grep -q 'points="40,14 62,27 40,40 18,27"' index.html
-          grep -q 'x2="40" y2="66"' index.html
+          grep -q 'viewBox="0 0 24 26"' index.html
+          grep -q 'M12 6 L17 9 L17 16 L12 19 L7 16 L7 9 Z' index.html
+          grep -q 'M12 12 L12 19' index.html
+          grep -q 'stroke="#FF6A00"' index.html
+          grep -q 'fill="#000000"' index.html
           grep -q '#FF6A00' styles.css
           test "$(grep -h 'Built by David T Phung' index.html quote/index.html contact/index.html | wc -l)" -eq 3
           ! grep -q 'type="tel"' --include='*.html' -r .
           ! grep -qiE 'FDA|WMS|temperature|SLA' --include='*.html' -r .
           ! grep -q 'M16 3.2' --include='*.html' --include='*.svg' -r .
           ! grep -q '32x36' --include='*.html' --include='*.svg' -r .
-          ! grep -q 'viewBox="0 0 24 26"' --include='*.html' --include='*.svg' -r .
+          ! grep -q 'viewBox="0 0 80 80"' --include='*.html' --include='*.svg' -r .
           ! grep -rqP '[\x{2010}-\x{2015}\x{2212}]' --include='*.html' --include='*.css' --include='*.js' --include='*.md' .
           ! grep -rq 'role="tab"' --include='*.html' .
       - name: Publish to gh-pages
