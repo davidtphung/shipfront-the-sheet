@@ -16,15 +16,16 @@
       <nav class="nav" aria-label="Primary">
         <a class="brand" href="./" aria-label="Shipfront home">
           <svg class="mark" viewBox="0 0 24 26" aria-hidden="true">
-            <g fill="none" stroke="#000000" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
-              <path d="M7 9 L12 6 L17 9 L12 12 Z"/>
-              <path d="M7 9 L7 16 L12 19 L17 16 L17 9"/>
+            <polygon points="12,6 17,9 12,12 7,9" fill="#000000"/>
+            <polygon points="7,9 12,12 12,19 7,16" fill="#000000"/>
+            <polygon points="17,9 12,12 12,19 17,16" fill="#000000"/>
+            <g fill="none" stroke="#FF6A00" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
+              <path d="M12 6 L17 9 L17 16 L12 19 L7 16 L7 9 Z"/>
+              <path d="M7 9 L12 12 L17 9"/>
               <path d="M12 12 L12 19"/>
-              <path d="M12 6 L12 13 L7 16"/>
-              <path d="M12 13 L17 16"/>
             </g>
           </svg>
-          <span class="wordmark">SHIPFRONT</span>
+          <span class="wordmark-bar"><span class="wordmark">SHIPFRONT</span></span>
         </a>
 
         <ul class="nav-links">
@@ -47,15 +48,13 @@
         <p class="kicker" data-reveal>404</p>
         <h1 class="clip" data-clip style="--i:1"><span>Page not found.</span></h1>
         <p class="page-lead" data-reveal style="--i:2">That path is not on this site. Home, Quote, and Contact are the three pages.</p>
-        <a class="cta" href="./" data-reveal style="--i:3">Back to Shipfront</a>
+        <a class="cta--ink" href="./" data-reveal style="--i:3">Back to Shipfront</a>
       </section>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-row">
-      <span>1933 S. Broadway, Los Angeles CA 90007</span>
-      <a href="mailto:info@myshipfront.com">info@myshipfront.com</a>
       <span class="byline">Built by David T Phung</span>
     </div>
   </footer>
